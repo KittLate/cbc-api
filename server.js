@@ -46,7 +46,7 @@ app.post('/login', jsonParser, function (req, res, next) {
             }
             bcrypt.compare(req.body.password, user[0].password, function (err, isLogin) {
                 if (isLogin) {
-                    var token = jwt.sign({ Uuername: user[0].username }, secret, { expiresIn: '1d' });
+                    var token = jwt.sign({ Username: user[0].username }, secret, { expiresIn: '1d' });
                     res.json({ status: 'ok', message: 'login success', token })
                 } else {
                     res.json({ status: 'error', massage: 'incorrect password' })
