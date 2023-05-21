@@ -72,6 +72,10 @@ app.post('/info', jsonParser, function (req, res, next) {
         [req.body.certificateNo, req.body.standard, req.body.scope, req.body.company, req.body.approval, req.body.until],
         function (err, results, fields) {
             if (err) {
+                if (err.code === 'ER_DUP_ENTRY') {
+                    res.json({ status: 'error', message: 'certificateNo already exists' });
+                    return;
+                }
                 res.json({ status: 'error', message: err });
                 return;
             }
